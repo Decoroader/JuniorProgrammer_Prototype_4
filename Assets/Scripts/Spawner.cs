@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
@@ -9,13 +7,20 @@ public class Spawner : MonoBehaviour
     private float range = 9;
     void Start()
     {
-        enemyPos = new Vector3(Random.Range(-range, range), 0.5f, Random.Range(-range, range));
-        //Instantiate(enemyPrefab, enemyPos, Quaternion.identity);
+        SpawnEnemyWave(3);
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
+    void SpawnEnemyWave(int enemiesToSpawn)
+	{
+		for (int it = 0; it < enemiesToSpawn; it++)
+		{
+            enemyPos = new Vector3(Random.Range(-range, range), 0.5f, Random.Range(-range, range));
+
+            Instantiate(enemyPrefab, enemyPos, Quaternion.identity);
+        }
+	}
 }
