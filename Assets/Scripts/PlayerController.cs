@@ -5,11 +5,15 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public bool hasPowerup;
+    public GameObject powerupIndicator;
 
     private float speedPlayer = 1.1f;
     private float powerupStrenght = 25;
     private Rigidbody playerRigid;
     private GameObject focalPoint;
+    private Vector3 offsetIndPos = new Vector3(0, 0.55f, 0);
+
+
     void Start()
     {
         playerRigid = GetComponent<Rigidbody>();
@@ -20,6 +24,7 @@ public class PlayerController : MonoBehaviour
     {
         float playerMoveF_B = Input.GetAxis("Vertical");
         playerRigid.AddForce(focalPoint.transform.forward * playerMoveF_B * speedPlayer, ForceMode.Impulse);
+        powerupIndicator.transform.position = transform.position + offsetIndPos;
     }
 	private void OnTriggerEnter(Collider other)
 	{
@@ -27,6 +32,8 @@ public class PlayerController : MonoBehaviour
 		{
             hasPowerup = true;
             Destroy(other.gameObject);
+            StartCoroutine(PowerupCountdownRoutine());
+            powerupIndicator.SetActive(hasPowerup);
 		}
 	}
 	private void OnCollisionEnter(Collision collision)
@@ -39,4 +46,11 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Player contaced with " + collision.gameObject + " wth powerup is " + hasPowerup);
         }
 	}
+
+    IEnumerator PowerupCountdownRoutine()
+	{
+        yield return new WaitForSeconds(5);
+        hasPowerup = false;
+        powerupIndicator.SetActive(hasPowerup);
+    }
 }

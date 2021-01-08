@@ -10,7 +10,7 @@ public class Spawner : MonoBehaviour
     void Start()
     {
         enemyPos = new Vector3(Random.Range(-range, range), 0.5f, Random.Range(-range, range));
-        Instantiate(enemyPrefab, enemyPos, Quaternion.identity);
+        //Instantiate(enemyPrefab, enemyPos, Quaternion.identity);
     }
 
     // Update is called once per frame
