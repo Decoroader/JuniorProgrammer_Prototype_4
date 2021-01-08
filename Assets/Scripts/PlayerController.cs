@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private float speedPlayer = 1.5f;
+    public bool hasPowerup;
+
+    private float speedPlayer = 1.1f;
     private Rigidbody playerRigid;
     private GameObject focalPoint;
     void Start()
@@ -18,4 +20,17 @@ public class PlayerController : MonoBehaviour
         float playerMoveF_B = Input.GetAxis("Vertical");
         playerRigid.AddForce(focalPoint.transform.forward * playerMoveF_B * speedPlayer, ForceMode.Impulse);
     }
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.CompareTag("Powerup"))
+		{
+            hasPowerup = true;
+            Destroy(other.gameObject);
+		}
+	}
+	private void OnCollisionEnter(Collision collision)
+	{
+        if (collision.gameObject.CompareTag("Enemy") && hasPowerup)
+            Debug.Log("Player contaced with " + collision.gameObject + " wth powerup is " + hasPowerup);
+	}
 }
