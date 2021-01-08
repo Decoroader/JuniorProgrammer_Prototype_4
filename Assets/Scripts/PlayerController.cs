@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     public GameObject powerupIndicator;
 
     private float speedPlayer = 1.1f;
-    private float powerupStrenght = 25;
+    private float powerupStrenght = 33;
     private Rigidbody playerRigid;
     private GameObject focalPoint;
     private Vector3 offsetIndPos = new Vector3(0, 0.55f, 0);
