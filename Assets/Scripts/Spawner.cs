@@ -3,31 +3,41 @@
 public class Spawner : MonoBehaviour
 {
     public GameObject enemyPrefab;
+    public GameObject powerupPrefab;
+    
+    private int waveNumber = 1;
 
-    private Vector3 enemyPos;
     private float range = 9;
+
     //private int enemiesNumber;
     public static int enemiesNumber;
+
     void Start()
     {
-        SpawnEnemyWave(3);
+        SpawnEnemyWave(waveNumber);
+
     }
 
     void Update()
     {
         if (enemiesNumber < 1)
-            SpawnEnemyWave(3);
+        {
+            SpawnEnemyWave(++waveNumber);
+        }
     }
     void SpawnEnemyWave(int enemiesToSpawn)
 	{
         enemiesNumber = enemiesToSpawn;
 		for (int it = 0; it < enemiesToSpawn; it++)
 		{
-            enemyPos = new Vector3(Random.Range(-range, range), 0.5f, Random.Range(-range, range));
-
+            Vector3 enemyPos = new Vector3(Random.Range(-range, range), 0.5f, Random.Range(-range, range));
             Instantiate(enemyPrefab, enemyPos, Quaternion.identity);
         }
-	}
+        
+        Vector3 powerupPos = new Vector3(Random.Range(-range, range), 0.5f, Random.Range(-range, range));
+        Instantiate(powerupPrefab, powerupPos, Quaternion.identity);
+    }
+    //_______________!!!!!!!!!!!!!!!!!!!!!__________________________
     public void EnemiesNumberDecrement()
 	{
         enemiesNumber--;
@@ -40,5 +50,5 @@ public class Spawner : MonoBehaviour
 	{
         enemiesNumber = enNumb;
     }
-
+    //_______________!!!!!!!!!!!!!!!!!!!!!__________________________
 }
