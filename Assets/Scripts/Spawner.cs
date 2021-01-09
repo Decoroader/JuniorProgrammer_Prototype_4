@@ -18,7 +18,7 @@ public class Spawner : MonoBehaviour
 
     void Update()
     {
-        //enemyCount = FindObjectOfType<Enemy>().Length;
+        //enemyCount = FindGameObjectsWithTag<Enemy>().Length;
         if (CheckEnemiesList() < 1)
             SpawnEnemyWave(++waveNumber);
     }

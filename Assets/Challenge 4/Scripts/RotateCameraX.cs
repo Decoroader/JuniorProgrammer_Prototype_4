@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class RotateCameraX : MonoBehaviour
 {
-    private float speed = 200;
+    private float speed = 100;
     public GameObject player;
 
     // Update is called once per frame
@@ -14,6 +12,5 @@ public class RotateCameraX : MonoBehaviour
         transform.Rotate(Vector3.up, horizontalInput * speed * Time.deltaTime);
 
         transform.position = player.transform.position; // Move focal point with player
-
     }
 }

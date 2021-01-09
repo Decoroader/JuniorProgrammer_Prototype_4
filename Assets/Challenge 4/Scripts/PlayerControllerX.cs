@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerControllerX : MonoBehaviour
@@ -11,7 +10,7 @@ public class PlayerControllerX : MonoBehaviour
 
     public bool hasPowerup;
     public GameObject powerupIndicator;
-    public int powerUpDuration = 5;
+    public int powerUpDuration = 9;
     public ParticleSystem boostEffect;
 
     private float normalStrength = 10; // how hard to hit enemy without powerup
@@ -41,7 +40,8 @@ public class PlayerControllerX : MonoBehaviour
 
         // Set powerup indicator position to beneath player
         powerupIndicator.transform.position = transform.position + new Vector3(0, -0.6f, 0);
-
+        if (Input.GetKeyDown(KeyCode.Q))
+            Application.Quit();
     }
 
     // If Player collides with powerup, activate powerup
@@ -73,15 +73,9 @@ public class PlayerControllerX : MonoBehaviour
             Vector3 awayFromPlayer = other.gameObject.transform.position - transform.position;
 
             if (hasPowerup) // if have powerup hit enemy with powerup force
-            {
-                enemyRigidbody.AddForce(awayFromPlayer * powerupStrength, ForceMode.Impulse);
-            }
+            { enemyRigidbody.AddForce(awayFromPlayer * powerupStrength, ForceMode.Impulse); }
             else // if no powerup, hit enemy with normal strength 
-            {
-                enemyRigidbody.AddForce(awayFromPlayer * normalStrength, ForceMode.Impulse);
-            }
-
-
+            { enemyRigidbody.AddForce(awayFromPlayer * normalStrength, ForceMode.Impulse); }
         }
     }
 
